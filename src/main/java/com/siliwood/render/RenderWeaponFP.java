@@ -4,6 +4,7 @@ import com.siliwood.handler.FirearmManager;
 import com.siliwood.item.ItemFirearm;
 import com.siliwood.util.WeaponNBT;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.AbstractClientPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderHandEvent;
@@ -36,6 +37,9 @@ public class RenderWeaponFP
 
         AbstractClientPlayer player = event.getClientPlayer();
         GL11.glPushMatrix();
+
+        // proper item lighting so textured 3D faces aren't pitch black
+        net.minecraft.client.renderer.RenderHelper.enableStandardItemLighting();
 
         float bob = (float) Math.sin(player.ticksExisted * 0.1f) * 0.02f;
         // position like a typical FPS weapon at bottom-right of screen
@@ -72,7 +76,7 @@ public class RenderWeaponFP
         {
             GL11.glPushMatrix();
             GL11.glTranslatef(1.35f, 0.0f, 0f);
-            WeaponModels.box(new net.minecraft.client.model.ModelBase() {}, 0, -0.01f, -0.006f, 0.5f, 0.03f, 0.006f, 112, 0, 1f);
+            WeaponModels.box(new net.minecraft.client.model.ModelBase() {}, 0, -0.01f, -0.06f, 0.5f, 0.03f, 0.06f, 112, 0, 1f);
             GL11.glPopMatrix();
         }
 

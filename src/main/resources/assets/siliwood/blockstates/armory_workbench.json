@@ -1,0 +1,20 @@
+{
+ "variants": {
+  "facing=north": {
+   "model": "siliwood:block/armory_workbench",
+   "y": 0
+  },
+  "facing=south": {
+   "model": "siliwood:block/armory_workbench",
+   "y": 180
+  },
+  "facing=east": {
+   "model": "siliwood:block/armory_workbench",
+   "y": 270
+  },
+  "facing=west": {
+   "model": "siliwood:block/armory_workbench",
+   "y": 90
+  }
+ }
+}

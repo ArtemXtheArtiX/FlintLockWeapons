@@ -20,6 +20,7 @@ public final class PacketHandler
     {
         INSTANCE.registerMessage(PacketStageComplete.class, PacketStageComplete.class, disc++, Side.SERVER);
         INSTANCE.registerMessage(PacketToggleMode.class, PacketToggleMode.class, disc++, Side.SERVER);
+        INSTANCE.registerMessage(PacketCraftWeapon.class, PacketCraftWeapon.class, disc++, Side.SERVER);
     }
 
     public static void sendToServer(net.minecraftforge.fml.common.network.simpleimpl.IMessage msg)

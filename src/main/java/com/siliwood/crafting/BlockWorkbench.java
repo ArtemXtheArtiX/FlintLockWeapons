@@ -12,9 +12,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -59,18 +59,12 @@ public class BlockWorkbench extends Block
     public boolean renderAsNormalBlock() { return false; }
 
     @Override
-    public int getRenderType() { return 3; } // TESR-less model via block JSON
+    public int getRenderType() { return 3; } // model via block JSON
 
     @Override
-    public boolean canRenderInLayer(EnumWorldBlockLayer layer)
+    public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
-        return layer == EnumWorldBlockLayer.CUTOUT_MIPPED;
-    }
-
-    @Override
-    public MapColor getMapColor(IBlockState state)
-    {
-        return MapColor.adobeColor;
+        return MapColor.ADOBE;
     }
 
     @Override
@@ -78,7 +72,7 @@ public class BlockWorkbench extends Block
     {
         if (!worldIn.isRemote)
         {
-            player.openGui(SiliwoodMod.instance, GuiHandler.GUI_WORKBENCH, worldIn, pos, side, hitX, hitY, hitZ);
+            player.openGui(SiliwoodMod.instance, SiliwoodMod.GuiHandler.GUI_WORKBENCH, worldIn, pos, side, hitX, hitY, hitZ);
         }
         return true;
     }

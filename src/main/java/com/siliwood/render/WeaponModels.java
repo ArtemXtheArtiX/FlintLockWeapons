@@ -2,6 +2,8 @@ package com.siliwood.render;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -24,12 +26,24 @@ public class WeaponModels
     /** Textured cuboid drawn with absolute local coords (no baked rotation). */
     public static void box(ModelBase model, float x0, float y0, float z0, float x1, float y1, float z1, float u, float v, float s)
     {
-        float dx = x1 - x0, dy = y1 - y0, dz = z1 - z0;
-        ModelRenderer m = new ModelRenderer(model);
-        m.setTextureOffset((int) u, (int) v);
-        m.addBox(x0, y0, z0, (int) Math.ceil(dx), (int) Math.ceil(dy), (int) Math.ceil(dz));
-        m.scale(s, s, s);
-        m.render(0f);
+        // geometry is magnified by s, but UV mapping stays inside the 32x32 atlas page
+        ModelRenderer m = new ModelRenderer(model, (int) u, (int) v);
+        m.addBox("swbox", x0 / s, y0 / s, z0 / s,
+                Math.max(1, (int) Math.ceil((x1 - x0) / s)),
+                Math.max(1, (int) Math.ceil((y1 - y0) / s)),
+                Math.max(1, (int) Math.ceil((z1 - z0) / s)));
+        m.render(0.0625f * s);
+    }
+
+    /** Proper 3D cuboid with full depth dz (used for barrels/bodies). */
+    public static void box3d(ModelBase model, float x0, float y0, float z0, float x1, float y1, float z1, float u, float v)
+    {
+        ModelRenderer m = new ModelRenderer(model, (int) u, (int) v);
+        m.addBox("swbox3d", x0 * 16f, y0 * 16f, z0 * 16f,
+                Math.max(1, (int) Math.ceil((x1 - x0) * 16f)),
+                Math.max(1, (int) Math.ceil((y1 - y0) * 16f)),
+                Math.max(1, (int) Math.ceil((z1 - z0) * 16f)));
+        m.render(0.0625f);
     }
 
     // ---------------------------------------------------------------- models

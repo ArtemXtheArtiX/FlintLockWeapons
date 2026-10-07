@@ -8,7 +8,7 @@ import com.siliwood.network.PacketToggleMode;
 import com.siliwood.util.WeaponNBT;
 import com.siliwood.weapon.ReloadStage;
 import com.siliwood.weapon.WeaponStats;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
